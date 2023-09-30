@@ -6,6 +6,23 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 
+/**
+ * ArrayList 와 LinkedList 비교
+ * add(끝) | ArrayList: 상수 시간, LinkedList: 선형
+ * add(시작) | ArrayList: 선형, LinkedList: 상수 시간
+ * add(일반) | ArrayList: 선형, LinkedList: 선형
+ * get / set | ArrayList: 상수 시간, LinkedList: 선형
+ * indexOf / lastIndexOf | ArrayList: 선형, LinkedList: 선형
+ * isEmpty / size | ArrayList: 상수 시간, LinkedList: 상수 시간
+ * remove(끝) | ArrayList: 상수 시간, LinkedList: 선형
+ * remove(시작) | ArrayList: 선형, LinkedList: 상수 시간
+ * remove(일반) | ArrayList: 선형, LinkedList: 선형
+ *
+ * 결론:
+ * ArrayList: 끝에 추가 및 삭제와 get, set 에 이점
+ * LinkedList: 시작에 추가 및 삭제에 이점
+ */
+
 public class MyLinkedList<E> implements List<E> {
 
     // 내부 클래스
@@ -54,6 +71,15 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public void add(int index, E element) {
+        // 최적화 코드
+        if(index == 0) {
+            head = new Node(element, head);
+        } else {
+            Node node = getNode(index - 1); // getNode에서 예외 처리
+            node.next = new Node(element, node.next);
+        }
+        size++;
+        /* 내가 쓴 코드
         if(index < 0 || index > size) {
             throw new IndexOutOfBoundsException();
         }
@@ -68,7 +94,8 @@ public class MyLinkedList<E> implements List<E> {
             node.next = newNode;
         }
         size++;
-    }
+         */
+    } // 선형
 
     @Override
     public boolean addAll(Collection<? extends E> collection) {
@@ -109,7 +136,7 @@ public class MyLinkedList<E> implements List<E> {
     public E get(int index) {
         Node node = getNode(index);
         return node.data;
-    }
+    } // 선형
 
     private Node getNode(int index) {
         if (index < 0 || index >= size) {
@@ -120,7 +147,7 @@ public class MyLinkedList<E> implements List<E> {
             node = node.next;
         }
         return node;
-    }
+    } // 선형
 
     @Override
     public int indexOf(Object target) {
@@ -131,7 +158,7 @@ public class MyLinkedList<E> implements List<E> {
             }
         }
         return -1;
-    }
+    } // 선형 -> 없거나 마지막 요소라면 리스트 전체를 순회할 수도 있음
 
     private boolean equals(Object target, Object element) {
         if (target == null) {
@@ -187,6 +214,17 @@ public class MyLinkedList<E> implements List<E> {
 
     @Override
     public E remove(int index) {
+        // 최적화 코드
+        E element = get(index);
+        if(index == 0) {
+            head = head.next;
+        } else {
+            Node node = getNode(index-1);
+            node.next = node.next.next; // next 로 연결이 가능 -> 주소를 참조
+        }
+        size--;
+        return element;
+        /* 내가 쓴 코드
         Node node = getNode(index);
         if(index == 0) {
             head = node.next;
@@ -196,7 +234,8 @@ public class MyLinkedList<E> implements List<E> {
         }
         size--;
         return node.data;
-    }
+         */
+    } // 선형
 
     @Override
     public boolean removeAll(Collection<?> collection) {

@@ -12,3 +12,4 @@
 | 6. 트리 순회 | [WikiNodeExample](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/WikiNodeExample.java) |
 | 7. 철학으로 가는 길 | [WikiNodeIterable](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/WikiNodeIterable.java)<br>[WikiFetcher](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/WikiFetcher.java)<br>[WikiParser](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/WikiParser.java)<br>[WikiPhilosophy](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/WikiPhilosophy.java) |
 | 8. 인덱서 | [TermCounter](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/TermCounter.java)<br>[Index](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/Index.java) |
+| 9. Map | [MyLinearMap](https://github.com/Mangjun/DataStructures/blob/main/Code/src/solution/MyLinearMap.java) |
